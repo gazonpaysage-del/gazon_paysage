@@ -1,0 +1,39 @@
+# A renseigner après création du dépôt GitHub et configuration OAuth sécurisée.
+backend:
+  name: github
+  repo: A_REMPLACER/NOM_DU_DEPOT
+  branch: main
+  # base_url: https://votre-service-oauth.example
+  # auth_endpoint: auth
+media_folder: "photos/ajouts"
+public_folder: "/photos/ajouts"
+locale: fr
+collections:
+  - name: "site"
+    label: "Contenu du site"
+    files:
+      - label: "Accueil et réalisations"
+        name: "accueil"
+        file: "contenu/site.json"
+        format: json
+        fields:
+          - {label: "Titre de l'accueil", name: titre_accueil, widget: string}
+          - {label: "Présentation de Yann", name: presentation, widget: text}
+          - label: "Réalisations supplémentaires"
+            name: realisations
+            widget: list
+            required: false
+            summary: "{{fields.titre}} — {{fields.categorie}}"
+            fields:
+              - {label: "Nom du chantier", name: titre, widget: string}
+              - {label: "Description", name: description, widget: text, required: false}
+              - label: "Rubrique"
+                name: categorie
+                widget: select
+                options:
+                  - {label: "Gazon synthétique", value: gazon}
+                  - {label: "Terrasses, pergolas et clôtures bois", value: bois}
+                  - {label: "Massifs exotiques et aménagements", value: exotiques}
+                  - {label: "Murs végétaux artificiels", value: vegetaux}
+              - {label: "Photo avant", name: photo_avant, widget: image, required: false}
+              - {label: "Photo après", name: photo_apres, widget: image}
